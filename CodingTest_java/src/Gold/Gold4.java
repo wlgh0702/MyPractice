@@ -1,9 +1,10 @@
 package Gold;
 
+import common.Num;
+
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Gold4 {
     public static void No1253(BufferedReader br) throws IOException {
@@ -45,5 +46,35 @@ public class Gold4 {
             }
         }
         System.out.println(count);
+    }
+
+    public static void No17298(BufferedReader br) throws IOException {
+        /*
+        * 오큰수 구하기
+        * */
+
+        int N = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        Stack<Integer> stack = new Stack<>();
+        StringBuilder sb = new StringBuilder();
+        int[] numbers = new int[N];
+        int[] ans = new int[N];
+        stack.push(0);
+        for(int i = 0; i < N; i++) {
+            numbers[i] = Integer.parseInt(st.nextToken());
+        }
+       for(int i = 1; i < N; i++) {
+            while(!stack.isEmpty() && numbers[stack.peek()] < numbers[i]) {
+                ans[stack.pop()] = numbers[i];
+            }
+            stack.push(i);
+        }
+       while(!stack.isEmpty()) {
+           ans[stack.pop()] = -1;
+       }
+       for(int i = 0; i < N; i++) {
+           sb.append(ans[i] + " ");
+       }
+        System.out.println(sb);
     }
 }
